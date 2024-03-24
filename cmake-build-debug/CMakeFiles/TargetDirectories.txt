@@ -1,0 +1,3 @@
+C:/Users/Filip/Documents/Studia/Przesyłanie Danych Multimedialnych/TS_parser_S0/cmake-build-debug/CMakeFiles/TS-PARSER.dir
+C:/Users/Filip/Documents/Studia/Przesyłanie Danych Multimedialnych/TS_parser_S0/cmake-build-debug/CMakeFiles/edit_cache.dir
+C:/Users/Filip/Documents/Studia/Przesyłanie Danych Multimedialnych/TS_parser_S0/cmake-build-debug/CMakeFiles/rebuild_cache.dir
