@@ -24,7 +24,7 @@ void xTS_PacketHeader::Reset() {
   @return Number of parsed bytes (4 on success, -1 on failure) 
  */
 int32_t xTS_PacketHeader::Parse(const uint8_t *Input) {
-    uint32_t *HeaderPtr = (uint32_t *) Input;
+    uint32_t *HeaderPtr = (uint32_t *) Input; //
     uint32_t HeaderData = xSwapBytes32(*HeaderPtr);
 
     uint32_t E_mask = 0b00000000100000000000000000000000;
@@ -61,5 +61,60 @@ void xTS_PacketHeader::Print() const {
     printf(" AFC=%d", m_AFC);
     printf(" CC=%d", m_CC);
 }
+
+
+/// @brief Reset - reset all TS packet header fields
+void xTS_AdaptationField::Reset() {
+    m_AFL = 0;
+    m_AdaptationFieldControl = 0;
+}
+
+/**
+@brief Parse adaptation field
+@param PacketBuffer is pointer to buffer containing TS packet
+@param AdaptationFieldControl is value of Adaptation Field Control field of
+corresponding TS packet header
+@return Number of parsed bytes (length of AF or -1 on failure)
+*/
+int32_t xTS_AdaptationField::Parse(const uint8_t *PacketBuffer) {
+    uint32_t *AFCPtr = (uint32_t *) (PacketBuffer + 4); // bo długość headera to 4 bajty, więc żeby go ominąć to dodajemy 4 i przesuwamy się o 4 bajty tym samym
+    uint32_t AFCData = xSwapBytes32(*AFCPtr);
+
+    uint32_t DC_mask = 0b00000000100000000000000000000000;
+    uint32_t RA_mask = 0b00000000010000000000000000000000;
+    uint32_t SP_mask = 0b00000000000100000000000000000000;
+    uint32_t PR_mask = 0b00000000000010000000000000000000;
+    uint32_t OR_mask = 0b00000000000001000000000000000000;
+    uint32_t SF_mask = 0b00000000000000100000000000000000;
+    uint32_t TP_mask = 0b00000000000000010000000000000000;
+    uint32_t EX_mask = 0b00000000000000001000000000000000;
+
+
+    m_AFL = AFCData >> 24;
+    m_DC = (AFCData bitand DC_mask) >> 23;
+    m_RA = (AFCData bitand RA_mask) >> 22;
+    m_SP = (AFCData bitand SP_mask) >> 21;
+    m_PR = (AFCData bitand PR_mask) >> 20;
+    m_OR = (AFCData bitand OR_mask) >> 19;
+    m_SF = (AFCData bitand SF_mask) >> 18;
+    m_TP = (AFCData bitand TP_mask) >> 17;
+    m_EX = (AFCData bitand EX_mask) >> 16;
+
+    return 0;
+}
+
+/// @brief Print all TS packet header fields
+void xTS_AdaptationField::Print() const {
+    printf(" AF: L=%d", m_AFL);
+    printf(" DC=%d", m_DC);
+    printf(" RA=%d", m_RA);
+    printf(" SP=%d", m_SP);
+    printf(" PR=%d", m_PR);
+    printf(" OR=%d", m_OR);
+    printf(" SF=%d", m_SF);
+    printf(" TP=%d", m_TP);
+    printf(" EX=%d", m_EX);
+}
+
 
 //=============================================================================================================================================================================

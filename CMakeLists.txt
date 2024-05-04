@@ -32,7 +32,8 @@ endif()
 set(PROJECT_SOURCES  
   tsCommon.h
   tsTransportStream.h tsTransportStream.cpp
-  TS_parser.cpp)
+  TS_parser.cpp
+)
 
 source_group("Source Files" FILES ${PROJECT_SOURCES})
 

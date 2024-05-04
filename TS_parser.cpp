@@ -1,6 +1,5 @@
 #include "tsCommon.h"
 #include "tsTransportStream.h"
-
 //=============================================================================================================================================================================
 
 int main(int argc, char *argv[ ], char *envp[ ])
@@ -17,10 +16,12 @@ int main(int argc, char *argv[ ], char *envp[ ])
   }
 
   xTS_PacketHeader TS_PacketHeader;
+  xTS_AdaptationField TS_AdaptationField;
 
   const uint8_t  TS_Buffer_Size = 188;
   uint8_t  TS_PacketBuffer[TS_Buffer_Size];
   int32_t TS_PacketId = 0;
+
 
 
   while(!std::feof(fp))
@@ -30,9 +31,18 @@ int main(int argc, char *argv[ ], char *envp[ ])
 
     TS_PacketHeader.Reset();
     TS_PacketHeader.Parse(TS_PacketBuffer);
-
     printf("%010d ", TS_PacketId);
     TS_PacketHeader.Print();
+
+    if(TS_PacketHeader.hasAdaptationField()) {
+        TS_AdaptationField.Reset();
+        TS_AdaptationField.Parse(TS_PacketBuffer);
+        TS_AdaptationField.Print();
+    }
+
+
+
+
     printf("\n");
 
     TS_PacketId++;
