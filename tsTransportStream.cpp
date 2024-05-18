@@ -118,3 +118,40 @@ void xTS_AdaptationField::Print() const {
 
 
 //=============================================================================================================================================================================
+xPES_Assembler::xPES_Assembler() {
+
+}
+
+xPES_Assembler::~xPES_Assembler() {
+
+}
+
+void xPES_Assembler::Init(int32_t PID) {
+
+}
+
+xPES_Assembler::eResult
+xPES_Assembler::AbsorbPacket(const uint8_t *TransportStreamPacket, const xTS_PacketHeader *PacketHeader,
+                             const xTS_AdaptationField *AdaptationField) {
+    return xPES_Assembler::eResult::StreamPackedLost;
+}
+
+void xPES_Assembler::xBufferReset() {
+
+}
+
+void xPES_Assembler::xBufferAppend(const uint8_t *Data, int32_t Size) {
+
+}
+
+void xPES_PacketHeader::Reset() {
+
+}
+
+int32_t xPES_PacketHeader::Parse(const uint8_t *Input) {
+    return 0;
+}
+
+void xPES_PacketHeader::Print() const {
+
+}
