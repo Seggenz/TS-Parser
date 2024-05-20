@@ -83,7 +83,6 @@ public:
     void Print() const;
 
 public:
-    //TODO - direct access to header field value, e.g.:
     uint8_t getSyncByte() const { return m_SB; }
 
     uint8_t getME() const { return m_E; }
@@ -163,6 +162,7 @@ protected:
     uint32_t m_PacketStartCodePrefix;
     uint8_t m_StreamId;
     uint16_t m_PacketLength;
+    uint8_t m_PES_header_data_length;
 public:
     void Reset();
     int32_t Parse(const uint8_t* Input);

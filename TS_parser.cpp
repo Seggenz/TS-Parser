@@ -4,19 +4,16 @@
 
 int main(int argc, char *argv[ ], char *envp[ ])
 {
-  // DONE -> TODO - open file
 
   FILE* fp = std::fopen("../example_new.ts", "rb");
-
-  // DONE -> TODO - check if file if opened
 
   if (!fp) {
       std:perror("File opening failed");
       return EXIT_FAILURE;
   }
 
-  xTS_PacketHeader TS_PacketHeader;
-  xTS_AdaptationField TS_AdaptationField;
+  xTS_PacketHeader TS_PacketHeader{};
+  xTS_AdaptationField TS_AdaptationField{};
   xPES_Assembler PES_Assembler;
 
   const uint8_t  TS_Buffer_Size = 188;
@@ -40,14 +37,14 @@ int main(int argc, char *argv[ ], char *envp[ ])
           TS_PacketHeader.Print();
           if(TS_PacketHeader.hasAdaptationField()) { TS_AdaptationField.Print(); }
           xPES_Assembler::eResult Result = PES_Assembler.AbsorbPacket(TS_PacketBuffer, &TS_PacketHeader, &TS_AdaptationField);
-          switch(Result)
-          {
+          switch(Result) {
               case xPES_Assembler::eResult::StreamPackedLost : printf("PcktLost "); break;
-              case xPES_Assembler::eResult::AssemblingStarted : printf("Started "); PES_Assembler.PrintPESH(); break;
+              case xPES_Assembler::eResult::AssemblingStarted : printf("Started PES: "); PES_Assembler.PrintPESH(); break;
               case xPES_Assembler::eResult::AssemblingContinue: printf("Continue "); break;
-              case xPES_Assembler::eResult::AssemblingFinished: printf("Finished "); printf("PES: Len=%d", PES_Assembler.getNumPacketBytes()); break;
+              case xPES_Assembler::eResult::AssemblingFinished: printf("Finished PES: Len=%d", PES_Assembler.getNumPacketBytes()); break;
               default: break;
           }
+
           printf("\n");
       }
 
@@ -73,11 +70,9 @@ int main(int argc, char *argv[ ], char *envp[ ])
 //    printf("\n");
 
     TS_PacketId++;
+      if (TS_PacketId == 34) break; //display only first 34 packets
   }
 
-
-
-  // DONE -> TODO - close file
   std::fclose(fp);
 
   return EXIT_SUCCESS;
