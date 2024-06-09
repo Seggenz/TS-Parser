@@ -1,3 +1,0 @@
-C:/Users/Filip/Documents/Studia/PDM/TS-Parser/cmake-build-debug/CMakeFiles/TS-PARSER.dir
-C:/Users/Filip/Documents/Studia/PDM/TS-Parser/cmake-build-debug/CMakeFiles/edit_cache.dir
-C:/Users/Filip/Documents/Studia/PDM/TS-Parser/cmake-build-debug/CMakeFiles/rebuild_cache.dir
