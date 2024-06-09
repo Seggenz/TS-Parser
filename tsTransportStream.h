@@ -66,7 +66,6 @@ public:
   };
 
 protected:
-  //TODO - header fields, e.g.:
   uint8_t  m_SB;
   uint8_t  m_E;
   uint8_t  m_S;
@@ -82,7 +81,6 @@ public:
   void     Print() const;
 
 public:
-  //TODO - direct acces to header field value, e.g.:
     uint8_t  getSyncByte() const { return m_SB; }
     uint8_t  getEByte() const { return m_E; }
     uint8_t  getStartByte() const { return m_S; }
