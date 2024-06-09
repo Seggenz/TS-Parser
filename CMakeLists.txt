@@ -33,10 +33,16 @@ set(PROJECT_SOURCES
   tsCommon.h
   tsTransportStream.h tsTransportStream.cpp
   TS_parser.cpp
+        PES_Assembler.cpp
+        PES_PacketHeader.cpp
+        tsAdaptationField.cpp
 )
 
 source_group("Source Files" FILES ${PROJECT_SOURCES})
 
-add_executable(${PROJECT_NAME} ${PROJECT_SOURCES})
+add_executable(${PROJECT_NAME} ${PROJECT_SOURCES}
+        PES_Assembler.cpp
+        PES_PacketHeader.cpp
+        tsAdaptationField.cpp)
 
 
